@@ -1,0 +1,31 @@
+
+<div class="room_index_container">
+  <div class="room_index_top">
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :area, placeholder: "エリア名を入力" %>
+    <%= f.text_field :keyword, placeholder: "キーワード名を入力" %>
+    <%= f.submit "検索" %>
+  <% end %>
+  </div>
+  <div class="room_index_main">
+    <div class="index_count">
+      <%= "#{@rooms.count}件が見つかりました。" %>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @rooms.each do |r| %>
+        <div class="col">
+          <div class="card">
+            <img src=<%= r.image %>>
+            <div class="card-body">
+              <h6 class="card-title"><%= r.name %></h6>
+              <p><%= r.address %></p>
+              <p class="card-text"><%= r.detail %></p>
+              <%= r.price %>
+              <%= link_to("詳細", "/rooms/#{r.id}", class: "btn btn-primary") %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

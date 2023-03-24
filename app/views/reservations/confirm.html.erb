@@ -1,0 +1,16 @@
+<h1>予約内容の確認</h1>
+<%= "チェックイン：#{@reservation.check_in.strftime("%Y/%m/%d")}" %><br>
+<%= "チェックアウト：#{@reservation.check_out.strftime("%Y/%m/%d")}" %><br>
+<%= "日数：#{(@reservation.check_out - @reservation.check_in).to_i}日" %><br>
+<%= "人数：#{@reservation.person}人" %><br>
+<%= "お支払い金額：¥#{@reservation.person * @reservation.room.price * (@reservation.check_out - @reservation.check_in).to_i }" %>
+
+<%= form_with model: @reservation, url: "/reservations" do |r| %>
+    <p><%= r.hidden_field :check_in %></p>
+    <p><%= r.hidden_field :check_out %></p>
+    <p><%= r.hidden_field :person %></p>
+    <p><%= r.hidden_field :user_id, value: @user.id%></p>
+    <p><%= r.hidden_field :room_id, value: @reservation.room_id %></p>
+<%= r.submit "予約確定" %>  
+<%= link_to("戻る", :back, class: "btn btn-primary") %>  
+<% end %>
