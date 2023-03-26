@@ -1,5 +1,5 @@
-class AddUserIdToRoom < ActiveRecord::Migration[6.1]
+class AddUserIdToRooms < ActiveRecord::Migration[6.1]
   def change
-    add_column :room, :user_id, :integer
+    add_column :rooms, :user_id, :integer
   end
 end
