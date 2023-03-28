@@ -1,0 +1,44 @@
+<div class="reservation_index_table">
+  <h1>予約済み一覧</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">画像</th>
+        <th scope="col">施設名</th>
+        <th scope="col">紹介文</th>
+        <th scope="col">合計料金</th>
+        <th scope="col">チェックイン</th>
+        <th scope="col">チェックアウト</th>
+        <th scope="col">予約確定日時</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% if @reservation == 0 %>
+      <p>予約を登録してください</p>
+    <% else %>
+      <% @reservations.each do |r| %>
+        <tr>
+          <td scope="row">
+            <% if r.room.image.present? %>
+              <img src=<%= r.room.image %>>
+            <% else %>
+              <%= image_tag "default_room.png", :size => "200x115" %>
+            <% end %>
+          </td>
+          <td><%= r.room.name %></td>
+          <td><%= r.room.detail %></td>
+          <td><%= r.room.price * r.person * (r.check_out - r.check_in).to_i %></td>
+          <td><%= r.check_in.strftime("%Y/%m/%d") %></td>
+          <td><%= r.check_out.strftime("%Y/%m/%d") %></td>
+          <td><%= r.created_at.to_s(:datetime_jp) %></td>
+          <td><%= link_to("再予約", "/rooms/#{r.room.id}") %></td>
+          <td><%= link_to("予約を削除", "/reservations/#{r.id}", method: :delete, data: { confirm: '本当に削除しますか？' }) %></td>
+        </tr>
+      <% end %>
+    <% end %>  
+    </tbody>
+  </table>
+</div>
