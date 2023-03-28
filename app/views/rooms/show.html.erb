@@ -5,12 +5,16 @@
   </div>
   <div class="room_show_content">
     <div class="room_show_content_left">
-      <img src=<%= @room.image %>>
+      <% if @room.image.present? %>
+        <img src=<%= @room.image %>>
+      <% else %>
+        <%= image_tag "default_room.png", :size => '200x115' %>
+      <% end %>
     </div>
     <div class="room_show_content_right">
       <h2>施設名：<%= @room.name %><br></h2>
       <p>金額：<%= @room.price %></p>
-      <p>住所：<%= @room.address %><br><p>
+      <p>住所：<%= @room.address %><br></p>
       <p>詳細：<%= @room.detail %></p>
 
       <%= form_with model:@reservation, url: "/reservations/confirm" do |r| %>

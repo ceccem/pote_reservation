@@ -21,7 +21,13 @@
     <% else %>
       <% @reservations.each do |r| %>
         <tr>
-          <td scope="row"><img src=<%= r.room.image %>></td>
+          <td scope="row">
+            <% if r.room.image.present? %>
+              <img src=<%= r.room.image %>>
+            <% else %>
+              <%= image_tag "default_room.png", :size => "200x115" %>
+            <% end %>
+          </td>
           <td><%= r.room.name %></td>
           <td><%= r.room.detail %></td>
           <td><%= r.room.price * r.person * (r.check_out - r.check_in).to_i %></td>

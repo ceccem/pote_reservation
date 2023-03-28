@@ -16,18 +16,25 @@
       <%= link_to("Potepan Share", "/", class: "top_logo") %>
       <nav>
         <% if user_signed_in? %>
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle", style="color: white;" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.name %>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><%= link_to("施設の新規登録", new_room_path, class: "dropdown-item top_nav_hide") %></li>
-              <li><%= link_to("予約済み一覧", reservations_path, class: "dropdown-item top_nav_hide") %></li>
-              <li><%= link_to("登録済み一覧", "rooms/own", class: "dropdown-item top_nav_hide") %></li>
-              <li><%= link_to("アカウント設定", "/users/#{current_user.id}/show", class: "dropdown-item top_nav_hide") %></li>
-              <li><%= link_to("ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item top_nav_hide") %></li>
-            </ul>
-          </div> 
+          <div class="header_right">
+            <% if current_user.image.present? %>
+              <img src=<%= current_user.image %>>
+            <% else %>
+              <%= image_tag "default_icon.png" %>
+            <% end %>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle", style="color: white;" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= current_user.name %>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><%= link_to("施設の新規登録", new_room_path, class: "dropdown-item top_nav_hide") %></li>
+                <li><%= link_to("予約済み一覧", reservations_path, class: "dropdown-item top_nav_hide") %></li>
+                <li><%= link_to("登録済み一覧", "rooms/own", class: "dropdown-item top_nav_hide") %></li>
+                <li><%= link_to("アカウント設定", "/users/#{current_user.id}/show", class: "dropdown-item top_nav_hide") %></li>
+                <li><%= link_to("ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item top_nav_hide") %></li>
+              </ul>
+            </div> 
+          </div>
         <% else %>
           <%= link_to("ログイン", new_user_session_path, class: "top_nav") %>
           <%= link_to("新規登録", new_user_registration_path, class: "top_nav", class: "btn btn-primary top_nav")%>

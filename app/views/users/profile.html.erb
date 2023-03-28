@@ -2,7 +2,12 @@
 
 <%= form_with model: @user, url: users_update_path, method: :patch, scope: :user do |f| %>
     <div class="field">
-    <%= f.label :image, value: "プロフィール画像" %><br />
+      <% if @user.image.present? %>
+        <img src=<%= @user.image %>>
+      <% else %>
+        <%= image_tag "default_icon.png" %>
+      <% end %>
+    <%= f.label :image, value: "アイコン画像" %><br />
     <%= f.file_field :image, autofocus: true %>
   </div>
 

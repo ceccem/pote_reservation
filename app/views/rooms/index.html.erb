@@ -15,7 +15,11 @@
       <% @rooms.each do |r| %>
         <div class="col">
           <div class="card">
-            <img src=<%= r.image %>>
+            <% if r.image.present? %>
+              <img src=<%= r.image %>>
+            <% else %>
+              <%= image_tag "default_room.png" %>
+            <% end %>
             <div class="card-body">
               <h6 class="card-title"><%= r.name %></h6>
               <p><%= r.address %></p>

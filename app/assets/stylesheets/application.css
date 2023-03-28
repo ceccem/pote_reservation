@@ -39,6 +39,9 @@
    margin-right: 35px;
  }
 
+ .header_right {
+   display: flex;
+ }
  /* 共通ヘッダーハンバーガー時 */
 
  .top_nav_hide {

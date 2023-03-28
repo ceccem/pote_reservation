@@ -18,7 +18,13 @@
     <tbody>
       <% @rooms.each do |room| %>
         <tr>
-          <td scope="row"><img src=<%= room.image %>></td>
+          <td scope="row">
+            <% if room.image.present? %>
+              <img src=<%= room.image %>>
+            <% else %>
+              <%= image_tag "default_room.png", :size => "200x115" %>
+            <% end %>
+          </td>
           <td><%= link_to(room.name, room, :style => "text-decoration: none;") %></td>
           <td><%= room.detail %></td>
           <td><%= room.price %></td>

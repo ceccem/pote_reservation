@@ -71,7 +71,13 @@
               <table>
                   <tr>
                       <th>アイコン画像</th>
-                      <td><img src=<%= @user.image %>></td>
+                      <td>
+                        <% if @user.image.present? %>
+                          <img src=<%= @user.image %>>
+                        <% else %>
+                          <%= image_tag "default_icon.png" %>
+                        <% end %>
+                      </td>
                   </tr>
                   <tr>
                       <th>名前</th>
